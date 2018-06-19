@@ -25,20 +25,16 @@ if [ -e ${genome_sizes} ]; then
 
     if [ ! -e $name.+.bedGraph ]; then
         awk '$6=="+"' $name.bed | sort > $name.+.bed
-        bedtools genomecov -i $name.+.bed -g ${genome_sizes} -bg > $name.+.bedGr
-aph
+        bedtools genomecov -i $name.+.bed -g ${genome_sizes} -bg > $name.+.bedGraph
     fi
 
     if [ ! -e $name.-.bedGraph ]; then
         awk '$6=="-"' $name.bed | sort > $name.-.bed
-        bedtools genomecov -i $name.-.bed -g ${genome_sizes} -bg > $name.-.bedGr
-aph
+        bedtools genomecov -i $name.-.bed -g ${genome_sizes} -bg > $name.-.bedGraph
     fi
 
-    /home/ryomisawa/opt/UCSC_Genome_Browser/bedGraphToBigWig $name.+.bedGraph ${
-genome_sizes} $name.+.bw
-    /home/ryomisawa/opt/UCSC_Genome_Browser/bedGraphToBigWig $name.-.bedGraph ${
-genome_sizes} $name.-.bw
+    /home/ryomisawa/opt/UCSC_Genome_Browser/bedGraphToBigWig $name.+.bedGraph ${genome_sizes} $name.+.bw
+    /home/ryomisawa/opt/UCSC_Genome_Browser/bedGraphToBigWig $name.-.bedGraph ${genome_sizes} $name.-.bw
 
 else 
     echo "Error:${genome_sizes} is not found."
